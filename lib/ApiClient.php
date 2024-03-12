@@ -353,7 +353,7 @@ class ApiClient
 
                 $key = $h[0];
             } else {
-                if ($h[0][0] === "\t") {
+                if (strlen($h[0]) > 0 && $h[0][0] === "\t") {
                     $headers[$key] .= "\r\n\t".trim($h[0]);
                 } elseif (!$key) {
                     $headers[0] = trim($h[0]);
