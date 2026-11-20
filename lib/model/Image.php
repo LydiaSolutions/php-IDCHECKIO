@@ -244,7 +244,7 @@ class Image implements ArrayAccess
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['doc'] = $data['doc'] ?? null;
         $this->container['face'] = $data['face'] ?? null;
@@ -262,22 +262,22 @@ class Image implements ArrayAccess
         $invalid_properties = [];
 
         $allowed_values = ["CNI_BE_SPECIMEN", "CNI_BE_SPECIMEN_MRZ", "PASSEPORT_FR_SPECIMEN_NATACHA", "PASSEPORT_FR_SPECIMEN_NATACHA_MRZ", "CNI_FR_SPECIMEN_BERTHIER", "CNI_FR_SPECIMEN_BERTHIER_MRZ", "PASSEPORT_FR_SPECIMEN_GRAUX_MRZ", "PASSEPORT_FR_SPECIMEN_GRAUX", "CNI_BIH_SPECIMEN", "CNI_BIH_SPECIMEN_MRZ", "PASSEPORT_USA_FALSIFIE_TRAVELER", "PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ", "RP_FR_SPECIMEN_MARTIN", "RP_FR_SPECIMEN_MARTIN_MRZ", "CNI_GBR_SPECIMEN_FREEMAN", "CNI_GBR_SPECIMEN_FREEMAN_MRZ", "PASSEPORT_CHN_SPECIMEN_ZHENGJIAN", "PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ", "PASSEPORT_ITA_SPECIMEN_ROSSI", "PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ", "RP_GBR_SPECIMEN_IVANOVA", "RP_GBR_SPECIMEN_IVANOVA_MRZ", "DL_FR_SPECIMEN_MARTIN", "DL_FR_SPECIMEN_MARTIN_MRZ", "ELECTRICITE_FR_BERTHIER", "IMPOSITION_FR_BERTHIER", "RIB_FR_BERTHIER", "TELEPHONE_2DDOC_BERTHIER", "CARTE_GRISE_DUPONT", "SALAIRE_FR_BERTHIER"];
-        if (!in_array($this->container['doc'], $allowed_values)) {
+        if (!\in_array($this->container['doc'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'doc', must be one of 'CNI_BE_SPECIMEN', 'CNI_BE_SPECIMEN_MRZ', 'PASSEPORT_FR_SPECIMEN_NATACHA', 'PASSEPORT_FR_SPECIMEN_NATACHA_MRZ', 'CNI_FR_SPECIMEN_BERTHIER', 'CNI_FR_SPECIMEN_BERTHIER_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX', 'CNI_BIH_SPECIMEN', 'CNI_BIH_SPECIMEN_MRZ', 'PASSEPORT_USA_FALSIFIE_TRAVELER', 'PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ', 'RP_FR_SPECIMEN_MARTIN', 'RP_FR_SPECIMEN_MARTIN_MRZ', 'CNI_GBR_SPECIMEN_FREEMAN', 'CNI_GBR_SPECIMEN_FREEMAN_MRZ', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ', 'PASSEPORT_ITA_SPECIMEN_ROSSI', 'PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ', 'RP_GBR_SPECIMEN_IVANOVA', 'RP_GBR_SPECIMEN_IVANOVA_MRZ', 'DL_FR_SPECIMEN_MARTIN', 'DL_FR_SPECIMEN_MARTIN_MRZ', 'ELECTRICITE_FR_BERTHIER', 'IMPOSITION_FR_BERTHIER', 'RIB_FR_BERTHIER', 'TELEPHONE_2DDOC_BERTHIER', 'CARTE_GRISE_DUPONT', 'SALAIRE_FR_BERTHIER'.";
         }
 
         $allowed_values = ["RECTO", "VERSO"];
-        if (!in_array($this->container['face'], $allowed_values)) {
+        if (!\in_array($this->container['face'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'face', must be one of 'RECTO', 'VERSO'.";
         }
 
         $allowed_values = ["BASE64", "JPG"];
-        if (!in_array($this->container['raw_type'], $allowed_values)) {
+        if (!\in_array($this->container['raw_type'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'raw_type', must be one of 'BASE64', 'JPG'.";
         }
 
         $allowed_values = ["DL", "IR", "UV"];
-        if (!in_array($this->container['light'], $allowed_values)) {
+        if (!\in_array($this->container['light'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'light', must be one of 'DL', 'IR', 'UV'.";
         }
 
@@ -294,19 +294,19 @@ class Image implements ArrayAccess
     {
 
         $allowed_values = ["CNI_BE_SPECIMEN", "CNI_BE_SPECIMEN_MRZ", "PASSEPORT_FR_SPECIMEN_NATACHA", "PASSEPORT_FR_SPECIMEN_NATACHA_MRZ", "CNI_FR_SPECIMEN_BERTHIER", "CNI_FR_SPECIMEN_BERTHIER_MRZ", "PASSEPORT_FR_SPECIMEN_GRAUX_MRZ", "PASSEPORT_FR_SPECIMEN_GRAUX", "CNI_BIH_SPECIMEN", "CNI_BIH_SPECIMEN_MRZ", "PASSEPORT_USA_FALSIFIE_TRAVELER", "PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ", "RP_FR_SPECIMEN_MARTIN", "RP_FR_SPECIMEN_MARTIN_MRZ", "CNI_GBR_SPECIMEN_FREEMAN", "CNI_GBR_SPECIMEN_FREEMAN_MRZ", "PASSEPORT_CHN_SPECIMEN_ZHENGJIAN", "PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ", "PASSEPORT_ITA_SPECIMEN_ROSSI", "PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ", "RP_GBR_SPECIMEN_IVANOVA", "RP_GBR_SPECIMEN_IVANOVA_MRZ", "DL_FR_SPECIMEN_MARTIN", "DL_FR_SPECIMEN_MARTIN_MRZ", "ELECTRICITE_FR_BERTHIER", "IMPOSITION_FR_BERTHIER", "RIB_FR_BERTHIER", "TELEPHONE_2DDOC_BERTHIER", "CARTE_GRISE_DUPONT", "SALAIRE_FR_BERTHIER"];
-        if (!in_array($this->container['doc'], $allowed_values)) {
+        if (!\in_array($this->container['doc'], $allowed_values)) {
             return false;
         }
         $allowed_values = ["RECTO", "VERSO"];
-        if (!in_array($this->container['face'], $allowed_values)) {
+        if (!\in_array($this->container['face'], $allowed_values)) {
             return false;
         }
         $allowed_values = ["BASE64", "JPG"];
-        if (!in_array($this->container['raw_type'], $allowed_values)) {
+        if (!\in_array($this->container['raw_type'], $allowed_values)) {
             return false;
         }
         $allowed_values = ["DL", "IR", "UV"];
-        if (!in_array($this->container['light'], $allowed_values)) {
+        if (!\in_array($this->container['light'], $allowed_values)) {
             return false;
         }
         return true;
@@ -329,8 +329,8 @@ class Image implements ArrayAccess
      */
     public function setDoc($doc)
     {
-        $allowed_values = array('CNI_BE_SPECIMEN', 'CNI_BE_SPECIMEN_MRZ', 'PASSEPORT_FR_SPECIMEN_NATACHA', 'PASSEPORT_FR_SPECIMEN_NATACHA_MRZ', 'CNI_FR_SPECIMEN_BERTHIER', 'CNI_FR_SPECIMEN_BERTHIER_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX', 'CNI_BIH_SPECIMEN', 'CNI_BIH_SPECIMEN_MRZ', 'PASSEPORT_USA_FALSIFIE_TRAVELER', 'PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ', 'RP_FR_SPECIMEN_MARTIN', 'RP_FR_SPECIMEN_MARTIN_MRZ', 'CNI_GBR_SPECIMEN_FREEMAN', 'CNI_GBR_SPECIMEN_FREEMAN_MRZ', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ', 'PASSEPORT_ITA_SPECIMEN_ROSSI', 'PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ', 'RP_GBR_SPECIMEN_IVANOVA', 'RP_GBR_SPECIMEN_IVANOVA_MRZ', 'DL_FR_SPECIMEN_MARTIN', 'DL_FR_SPECIMEN_MARTIN_MRZ', 'ELECTRICITE_FR_BERTHIER', 'IMPOSITION_FR_BERTHIER', 'RIB_FR_BERTHIER', 'TELEPHONE_2DDOC_BERTHIER', 'CARTE_GRISE_DUPONT', 'SALAIRE_FR_BERTHIER');
-        if (!is_null($doc) && (!in_array($doc, $allowed_values))) {
+        $allowed_values = ['CNI_BE_SPECIMEN', 'CNI_BE_SPECIMEN_MRZ', 'PASSEPORT_FR_SPECIMEN_NATACHA', 'PASSEPORT_FR_SPECIMEN_NATACHA_MRZ', 'CNI_FR_SPECIMEN_BERTHIER', 'CNI_FR_SPECIMEN_BERTHIER_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX', 'CNI_BIH_SPECIMEN', 'CNI_BIH_SPECIMEN_MRZ', 'PASSEPORT_USA_FALSIFIE_TRAVELER', 'PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ', 'RP_FR_SPECIMEN_MARTIN', 'RP_FR_SPECIMEN_MARTIN_MRZ', 'CNI_GBR_SPECIMEN_FREEMAN', 'CNI_GBR_SPECIMEN_FREEMAN_MRZ', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ', 'PASSEPORT_ITA_SPECIMEN_ROSSI', 'PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ', 'RP_GBR_SPECIMEN_IVANOVA', 'RP_GBR_SPECIMEN_IVANOVA_MRZ', 'DL_FR_SPECIMEN_MARTIN', 'DL_FR_SPECIMEN_MARTIN_MRZ', 'ELECTRICITE_FR_BERTHIER', 'IMPOSITION_FR_BERTHIER', 'RIB_FR_BERTHIER', 'TELEPHONE_2DDOC_BERTHIER', 'CARTE_GRISE_DUPONT', 'SALAIRE_FR_BERTHIER'];
+        if (!\is_null($doc) && (!\in_array($doc, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'doc', must be one of 'CNI_BE_SPECIMEN', 'CNI_BE_SPECIMEN_MRZ', 'PASSEPORT_FR_SPECIMEN_NATACHA', 'PASSEPORT_FR_SPECIMEN_NATACHA_MRZ', 'CNI_FR_SPECIMEN_BERTHIER', 'CNI_FR_SPECIMEN_BERTHIER_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX_MRZ', 'PASSEPORT_FR_SPECIMEN_GRAUX', 'CNI_BIH_SPECIMEN', 'CNI_BIH_SPECIMEN_MRZ', 'PASSEPORT_USA_FALSIFIE_TRAVELER', 'PASSEPORT_USA_FALSIFIE_TRAVELER_MRZ', 'RP_FR_SPECIMEN_MARTIN', 'RP_FR_SPECIMEN_MARTIN_MRZ', 'CNI_GBR_SPECIMEN_FREEMAN', 'CNI_GBR_SPECIMEN_FREEMAN_MRZ', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN', 'PASSEPORT_CHN_SPECIMEN_ZHENGJIAN_MRZ', 'PASSEPORT_ITA_SPECIMEN_ROSSI', 'PASSEPORT_ITA_SPECIMEN_ROSSI_MRZ', 'RP_GBR_SPECIMEN_IVANOVA', 'RP_GBR_SPECIMEN_IVANOVA_MRZ', 'DL_FR_SPECIMEN_MARTIN', 'DL_FR_SPECIMEN_MARTIN_MRZ', 'ELECTRICITE_FR_BERTHIER', 'IMPOSITION_FR_BERTHIER', 'RIB_FR_BERTHIER', 'TELEPHONE_2DDOC_BERTHIER', 'CARTE_GRISE_DUPONT', 'SALAIRE_FR_BERTHIER'");
         }
         $this->container['doc'] = $doc;
@@ -354,8 +354,8 @@ class Image implements ArrayAccess
      */
     public function setFace($face)
     {
-        $allowed_values = array('RECTO', 'VERSO');
-        if (!is_null($face) && (!in_array($face, $allowed_values))) {
+        $allowed_values = ['RECTO', 'VERSO'];
+        if (!\is_null($face) && (!\in_array($face, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'face', must be one of 'RECTO', 'VERSO'");
         }
         $this->container['face'] = $face;
@@ -379,8 +379,8 @@ class Image implements ArrayAccess
      */
     public function setRawType($raw_type)
     {
-        $allowed_values = array('BASE64', 'JPG');
-        if (!is_null($raw_type) && (!in_array($raw_type, $allowed_values))) {
+        $allowed_values = ['BASE64', 'JPG'];
+        if (!\is_null($raw_type) && (!\in_array($raw_type, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'raw_type', must be one of 'BASE64', 'JPG'");
         }
         $this->container['raw_type'] = $raw_type;
@@ -404,8 +404,8 @@ class Image implements ArrayAccess
      */
     public function setLight($light)
     {
-        $allowed_values = array('DL', 'IR', 'UV');
-        if (!is_null($light) && (!in_array($light, $allowed_values))) {
+        $allowed_values = ['DL', 'IR', 'UV'];
+        if (!\is_null($light) && (!\in_array($light, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'light', must be one of 'DL', 'IR', 'UV'");
         }
         $this->container['light'] = $light;
@@ -440,7 +440,7 @@ class Image implements ArrayAccess
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -463,11 +463,11 @@ class Image implements ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

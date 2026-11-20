@@ -154,7 +154,7 @@ class DetailedInformationOfTheHolderOfTheSubmittedDocument implements ArrayAcces
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['last_name'] = $data['last_name'] ?? null;
         $this->container['first_name'] = $data['first_name'] ?? null;
@@ -434,7 +434,7 @@ class DetailedInformationOfTheHolderOfTheSubmittedDocument implements ArrayAcces
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -457,11 +457,11 @@ class DetailedInformationOfTheHolderOfTheSubmittedDocument implements ArrayAcces
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

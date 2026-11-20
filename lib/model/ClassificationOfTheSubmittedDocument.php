@@ -140,7 +140,7 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['id_type'] = $data['id_type'] ?? null;
     }
@@ -155,7 +155,7 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
         $invalid_properties = [];
 
         $allowed_values = ["ID", "P", "RP", "V", "DL", "UNKNOWN"];
-        if (!in_array($this->container['id_type'], $allowed_values)) {
+        if (!\in_array($this->container['id_type'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'id_type', must be one of 'ID', 'P', 'RP', 'V', 'DL', 'UNKNOWN'.";
         }
 
@@ -172,7 +172,7 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
     {
 
         $allowed_values = ["ID", "P", "RP", "V", "DL", "UNKNOWN"];
-        if (!in_array($this->container['id_type'], $allowed_values)) {
+        if (!\in_array($this->container['id_type'], $allowed_values)) {
             return false;
         }
         return true;
@@ -195,8 +195,8 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
      */
     public function setIdType($id_type)
     {
-        $allowed_values = array('ID', 'P', 'RP', 'V', 'DL', 'UNKNOWN');
-        if (!is_null($id_type) && (!in_array($id_type, $allowed_values))) {
+        $allowed_values = ['ID', 'P', 'RP', 'V', 'DL', 'UNKNOWN'];
+        if (!\is_null($id_type) && (!\in_array($id_type, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'id_type', must be one of 'ID', 'P', 'RP', 'V', 'DL', 'UNKNOWN'");
         }
         $this->container['id_type'] = $id_type;
@@ -231,7 +231,7 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -254,11 +254,11 @@ class ClassificationOfTheSubmittedDocument implements ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

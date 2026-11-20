@@ -134,7 +134,7 @@ class HealthResponse implements ArrayAccess
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['status'] = $data['status'] ?? null;
     }
@@ -149,7 +149,7 @@ class HealthResponse implements ArrayAccess
         $invalid_properties = [];
 
         $allowed_values = ["OK", "WARN", "ERROR"];
-        if (!in_array($this->container['status'], $allowed_values)) {
+        if (!\in_array($this->container['status'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'status', must be one of 'OK', 'WARN', 'ERROR'.";
         }
 
@@ -166,7 +166,7 @@ class HealthResponse implements ArrayAccess
     {
 
         $allowed_values = ["OK", "WARN", "ERROR"];
-        if (!in_array($this->container['status'], $allowed_values)) {
+        if (!\in_array($this->container['status'], $allowed_values)) {
             return false;
         }
         return true;
@@ -189,8 +189,8 @@ class HealthResponse implements ArrayAccess
      */
     public function setStatus($status)
     {
-        $allowed_values = array('OK', 'WARN', 'ERROR');
-        if (!is_null($status) && (!in_array($status, $allowed_values))) {
+        $allowed_values = ['OK', 'WARN', 'ERROR'];
+        if (!\is_null($status) && (!\in_array($status, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'status', must be one of 'OK', 'WARN', 'ERROR'");
         }
         $this->container['status'] = $status;
@@ -225,7 +225,7 @@ class HealthResponse implements ArrayAccess
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -248,11 +248,11 @@ class HealthResponse implements ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

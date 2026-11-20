@@ -56,7 +56,7 @@ class SandboxApi
      *
      * @param ApiClient|null $apiClient The api client to use
      */
-    public function __construct(ApiClient $apiClient = null)
+    public function __construct(?ApiClient $apiClient = null)
     {
         if ($apiClient === null) {
             $apiClient = new ApiClient();
@@ -97,8 +97,8 @@ class SandboxApi
      * @param string $raw_type Image raw type (optional)
      * @param string $face Image face (optional)
      * @param string $light Image light (optional)
-     * @return string[]
      *@throws ApiException on non-2xx response
+     * @return string[]
      */
     public function getImage($image_uid, $raw_type = null, $face = null, $light = null)
     {
@@ -115,8 +115,8 @@ class SandboxApi
      * @param string $raw_type Image raw type (optional)
      * @param string $face Image face (optional)
      * @param string $light Image light (optional)
-     * @return array of string[], HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of string[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getImageWithHttpInfo($image_uid, $raw_type = null, $face = null, $light = null)
     {
@@ -131,7 +131,7 @@ class SandboxApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['*/*']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
@@ -150,20 +150,20 @@ class SandboxApi
         }
         // path params
         if ($image_uid !== null) {
-            $resourcePath = str_replace(
+            $resourcePath = \str_replace(
                 "{" . "imageUid" . "}",
                 $this->apiClient->getSerializer()->toPathValue($image_uid),
                 $resourcePath
             );
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // make the API Call
@@ -217,8 +217,8 @@ class SandboxApi
      *
      * HTTP GET images list
      *
-     * @return array of \idcheckio\model\ImageListResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\ImageListResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getImageListWithHttpInfo()
     {
@@ -229,19 +229,19 @@ class SandboxApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
 
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // make the API Call
@@ -281,8 +281,8 @@ class SandboxApi
      * HTTP GET mrz
      *
      * @param string $mrz_uid EnumDemoDocsMrz (required)
-     * @return MrzResponse
      *@throws ApiException on non-2xx response
+     * @return MrzResponse
      */
     public function getMrz($mrz_uid)
     {
@@ -296,8 +296,8 @@ class SandboxApi
      * HTTP GET mrz
      *
      * @param string $mrz_uid EnumDemoDocsMrz (required)
-     * @return array of \idcheckio\model\MrzResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\MrzResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getMrzWithHttpInfo($mrz_uid)
     {
@@ -312,27 +312,27 @@ class SandboxApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
 
         // path params
         if ($mrz_uid !== null) {
-            $resourcePath = str_replace(
+            $resourcePath = \str_replace(
                 "{" . "mrzUid" . "}",
                 $this->apiClient->getSerializer()->toPathValue($mrz_uid),
                 $resourcePath
             );
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // make the API Call
@@ -372,8 +372,8 @@ class SandboxApi
      *
      * HTTP GET mrz list
      *
-     * @return MrzListResponse
      *@throws ApiException on non-2xx response
+     * @return MrzListResponse
      */
     public function getMrzList()
     {
@@ -386,8 +386,8 @@ class SandboxApi
      *
      * HTTP GET mrz list
      *
-     * @return array of \idcheckio\model\MrzListResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\MrzListResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getMrzListWithHttpInfo()
     {
@@ -398,19 +398,19 @@ class SandboxApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
 
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // make the API Call
