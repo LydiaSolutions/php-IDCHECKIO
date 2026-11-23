@@ -42,11 +42,9 @@ Download the files and include `autoload.php`:
 
 ## Tests
 
-The generated API test methods are empty scaffolding and do not establish behavioral coverage. The existing test procedure is:
-
-```
-composer install
-./vendor/bin/phpunit
+```sh
+composer --working-dir=test install --prefer-dist --no-progress --no-interaction
+make unit
 ```
 
 ## Getting Started
