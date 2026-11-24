@@ -148,7 +148,7 @@ class Control implements ArrayAccess
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['identifier'] = $data['identifier'] ?? null;
         $this->container['title_msg'] = $data['title_msg'] ?? null;
@@ -166,7 +166,7 @@ class Control implements ArrayAccess
         $invalid_properties = [];
 
         $allowed_values = ["NONE", "OK", "WARNING", "ERROR"];
-        if (!in_array($this->container['result'], $allowed_values)) {
+        if (!\in_array($this->container['result'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'result', must be one of 'NONE', 'OK', 'WARNING', 'ERROR'.";
         }
 
@@ -183,7 +183,7 @@ class Control implements ArrayAccess
     {
 
         $allowed_values = ["NONE", "OK", "WARNING", "ERROR"];
-        if (!in_array($this->container['result'], $allowed_values)) {
+        if (!\in_array($this->container['result'], $allowed_values)) {
             return false;
         }
         return true;
@@ -269,8 +269,8 @@ class Control implements ArrayAccess
      */
     public function setResult($result)
     {
-        $allowed_values = array('NONE', 'OK', 'WARNING', 'ERROR');
-        if (!is_null($result) && (!in_array($result, $allowed_values))) {
+        $allowed_values = ['NONE', 'OK', 'WARNING', 'ERROR'];
+        if (!\is_null($result) && (!\in_array($result, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'result', must be one of 'NONE', 'OK', 'WARNING', 'ERROR'");
         }
         $this->container['result'] = $result;
@@ -305,7 +305,7 @@ class Control implements ArrayAccess
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -328,11 +328,11 @@ class Control implements ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

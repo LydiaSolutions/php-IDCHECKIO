@@ -66,7 +66,7 @@ class ApiClient
      *
      * @param Configuration $config config for this ApiClient
      */
-    public function __construct(Configuration $config = null)
+    public function __construct(?Configuration $config = null)
     {
         if ($config === null) {
             $config = Configuration::getDefaultConfiguration();
@@ -132,15 +132,15 @@ class ApiClient
      * @param string $responseType expected response type of the endpoint
      * @param string $endpointPath path to method endpoint before expanding parameters
      *
-     * @return mixed
      *@throws ApiException on a non 2xx response
+     * @return mixed
      */
     public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null)
     {
         $headers = [];
 
         // construct the http header
-        $headerParams = array_merge(
+        $headerParams = \array_merge(
             (array)$this->config->getDefaultHeaders(),
             (array)$headerParams
         );
@@ -150,108 +150,108 @@ class ApiClient
         }
 
         // form data
-        if ($postData and in_array('Content-Type: application/x-www-form-urlencoded', $headers, true)) {
-            $postData = http_build_query($postData);
-        } elseif ((is_object($postData) or is_array($postData)) and !in_array('Content-Type: multipart/form-data', $headers, true)) { // json model
-            $postData = json_encode(ObjectSerializer::sanitizeForSerialization($postData));
+        if ($postData and \in_array('Content-Type: application/x-www-form-urlencoded', $headers, true)) {
+            $postData = \http_build_query($postData);
+        } elseif ((\is_object($postData) or \is_array($postData)) and !\in_array('Content-Type: multipart/form-data', $headers, true)) { // json model
+            $postData = \json_encode(ObjectSerializer::sanitizeForSerialization($postData));
         }
 
         $url = $this->config->getHost() . $resourcePath;
 
-        $curl = curl_init();
+        $curl = \curl_init();
         // set timeout, if needed
         if ($this->config->getCurlTimeout() !== 0) {
-            curl_setopt($curl, CURLOPT_TIMEOUT, $this->config->getCurlTimeout());
+            \curl_setopt($curl, CURLOPT_TIMEOUT, $this->config->getCurlTimeout());
         }
         // set connect timeout, if needed
         if ($this->config->getCurlConnectTimeout() != 0) {
-            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $this->config->getCurlConnectTimeout());
+            \curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $this->config->getCurlConnectTimeout());
         }
 
         // return the result on success, rather than just true
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        \curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        \curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
         // disable SSL verification, if needed
         if ($this->config->getSSLVerification() === false) {
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            \curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            \curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         }
 
         if ($this->config->getCurlProxyHost()) {
-            curl_setopt($curl, CURLOPT_PROXY, $this->config->getCurlProxyHost());
+            \curl_setopt($curl, CURLOPT_PROXY, $this->config->getCurlProxyHost());
         }
 
         if ($this->config->getCurlProxyPort()) {
-            curl_setopt($curl, CURLOPT_PROXYPORT, $this->config->getCurlProxyPort());
+            \curl_setopt($curl, CURLOPT_PROXYPORT, $this->config->getCurlProxyPort());
         }
 
         if ($this->config->getCurlProxyType()) {
-            curl_setopt($curl, CURLOPT_PROXYTYPE, $this->config->getCurlProxyType());
+            \curl_setopt($curl, CURLOPT_PROXYTYPE, $this->config->getCurlProxyType());
         }
 
         if ($this->config->getCurlProxyUser()) {
-            curl_setopt($curl, CURLOPT_PROXYUSERPWD, $this->config->getCurlProxyUser() . ':' .$this->config->getCurlProxyPassword());
+            \curl_setopt($curl, CURLOPT_PROXYUSERPWD, $this->config->getCurlProxyUser() . ':' .$this->config->getCurlProxyPassword());
         }
 
         if (!empty($queryParams)) {
-            $url .= '?'.http_build_query($queryParams);
+            $url .= '?'.\http_build_query($queryParams);
         }
 
         if ($method === self::$POST) {
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            \curl_setopt($curl, CURLOPT_POST, true);
+            \curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method === self::$HEAD) {
-            curl_setopt($curl, CURLOPT_NOBODY, true);
+            \curl_setopt($curl, CURLOPT_NOBODY, true);
         } elseif ($method === self::$OPTIONS) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "OPTIONS");
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "OPTIONS");
+            \curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method === self::$PATCH) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PATCH");
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PATCH");
+            \curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method === self::$PUT) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+            \curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method === self::$DELETE) {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            \curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method !== self::$GET) {
             throw new ApiException('Method ' . $method . ' is not recognized.');
         }
-        curl_setopt($curl, CURLOPT_URL, $url);
+        \curl_setopt($curl, CURLOPT_URL, $url);
 
         // Set user agent
-        curl_setopt($curl, CURLOPT_USERAGENT, $this->config->getUserAgent());
+        \curl_setopt($curl, CURLOPT_USERAGENT, $this->config->getUserAgent());
 
         // debugging for curl
         if ($this->config->getDebug()) {
-            error_log("[DEBUG] HTTP Request body  ~BEGIN~".PHP_EOL.print_r($postData, true).PHP_EOL."~END~".PHP_EOL, 3, $this->config->getDebugFile());
+            \error_log("[DEBUG] HTTP Request body  ~BEGIN~".PHP_EOL.\print_r($postData, true).PHP_EOL."~END~".PHP_EOL, 3, $this->config->getDebugFile());
 
-            curl_setopt($curl, CURLOPT_VERBOSE, 1);
-            curl_setopt($curl, CURLOPT_STDERR, fopen($this->config->getDebugFile(), 'a'));
+            \curl_setopt($curl, CURLOPT_VERBOSE, 1);
+            \curl_setopt($curl, CURLOPT_STDERR, \fopen($this->config->getDebugFile(), 'ab'));
         } else {
-            curl_setopt($curl, CURLOPT_VERBOSE, 0);
+            \curl_setopt($curl, CURLOPT_VERBOSE, 0);
         }
 
         // obtain the HTTP response headers
-        curl_setopt($curl, CURLOPT_HEADER, 1);
+        \curl_setopt($curl, CURLOPT_HEADER, 1);
 
         // Make the request
-        $response = curl_exec($curl);
-        $http_header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-        $http_header = $this->httpParseHeaders(substr($response, 0, $http_header_size));
-        $http_body = substr($response, $http_header_size);
-        $response_info = curl_getinfo($curl);
+        $response = \curl_exec($curl);
+        $http_header_size = \curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $http_header = $this->httpParseHeaders(\substr($response, 0, $http_header_size));
+        $http_body = \substr($response, $http_header_size);
+        $response_info = \curl_getinfo($curl);
 
         // debug HTTP response body
         if ($this->config->getDebug()) {
-            error_log("[DEBUG] HTTP Response body ~BEGIN~".PHP_EOL.print_r($http_body, true).PHP_EOL."~END~".PHP_EOL, 3, $this->config->getDebugFile());
+            \error_log("[DEBUG] HTTP Response body ~BEGIN~".PHP_EOL.\print_r($http_body, true).PHP_EOL."~END~".PHP_EOL, 3, $this->config->getDebugFile());
         }
 
         // Handle the response
         if ($response_info['http_code'] === 0) {
-            $curl_error_message = curl_error($curl);
+            $curl_error_message = \curl_error($curl);
 
             // curl_exec can sometimes fail but still return a blank message from curl_error().
             if (!empty($curl_error_message)) {
@@ -270,13 +270,13 @@ class ApiClient
                 return [$http_body, $response_info['http_code'], $http_header];
             }
 
-            $data = json_decode($http_body);
-            if (json_last_error() > 0) { // if response is a string
+            $data = \json_decode($http_body);
+            if (\json_last_error() > 0) { // if response is a string
                 $data = $http_body;
             }
         } else {
-            $data = json_decode($http_body);
-            if (json_last_error() > 0) { // if response is a string
+            $data = \json_decode($http_body);
+            if (\json_last_error() > 0) { // if response is a string
                 $data = $http_body;
             }
 
@@ -299,12 +299,12 @@ class ApiClient
      */
     public function selectHeaderAccept($accept)
     {
-        if (count($accept) === 0 or (count($accept) === 1 and $accept[0] === '')) {
+        if (\count($accept) === 0 or (\count($accept) === 1 and $accept[0] === '')) {
             return null;
-        } elseif (preg_grep("/application\/json/i", $accept)) {
+        } elseif (\preg_grep("/application\/json/i", $accept)) {
             return 'application/json';
         } else {
-            return implode(',', $accept);
+            return \implode(',', $accept);
         }
     }
 
@@ -317,12 +317,12 @@ class ApiClient
      */
     public function selectHeaderContentType($content_type)
     {
-        if (count($content_type) === 0 or (count($content_type) === 1 and $content_type[0] === '')) {
+        if (\count($content_type) === 0 or (\count($content_type) === 1 and $content_type[0] === '')) {
             return 'application/json';
-        } elseif (preg_grep("/application\/json/i", $content_type)) {
+        } elseif (\preg_grep("/application\/json/i", $content_type)) {
             return 'application/json';
         } else {
-            return implode(',', $content_type);
+            return \implode(',', $content_type);
         }
     }
 
@@ -339,26 +339,26 @@ class ApiClient
         $headers = [];
         $key = '';
 
-        foreach (explode("\n", $raw_headers) as $h) {
-            $h = explode(':', $h, 2);
+        foreach (\explode("\n", $raw_headers) as $h) {
+            $h = \explode(':', $h, 2);
 
             if (isset($h[1])) {
                 if (!isset($headers[$h[0]])) {
-                    $headers[$h[0]] = trim($h[1]);
-                } elseif (is_array($headers[$h[0]])) {
-                    $headers[$h[0]] = array_merge($headers[$h[0]], [trim($h[1])]);
+                    $headers[$h[0]] = \trim($h[1]);
+                } elseif (\is_array($headers[$h[0]])) {
+                    $headers[$h[0]] = \array_merge($headers[$h[0]], [\trim($h[1])]);
                 } else {
-                    $headers[$h[0]] = array_merge([$headers[$h[0]]], [trim($h[1])]);
+                    $headers[$h[0]] = \array_merge([$headers[$h[0]]], [\trim($h[1])]);
                 }
 
                 $key = $h[0];
             } else {
                 if (strlen($h[0]) > 0 && $h[0][0] === "\t") {
-                    $headers[$key] .= "\r\n\t".trim($h[0]);
+                    $headers[$key] .= "\r\n\t".\trim($h[0]);
                 } elseif (!$key) {
-                    $headers[0] = trim($h[0]);
+                    $headers[0] = \trim($h[0]);
                 }
-                trim($h[0]);
+                \trim($h[0]);
             }
         }
 

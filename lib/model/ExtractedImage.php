@@ -158,7 +158,7 @@ class ExtractedImage implements ArrayAccess
      * Constructor
      * @param mixed[] $data Associated array of property values initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['type'] = $data['type'] ?? null;
         $this->container['image_dl'] = $data['image_dl'] ?? null;
@@ -181,7 +181,7 @@ class ExtractedImage implements ArrayAccess
             $invalid_properties[] = "'type' can't be null";
         }
         $allowed_values = ["CROPPED_RECTO", "CROPPED_VERSO", "CROPPED_FACE", "CROPPED_SIGNATURE", "CROPPED_EMITTER_SIGNATURE"];
-        if (!in_array($this->container['type'], $allowed_values)) {
+        if (!\in_array($this->container['type'], $allowed_values)) {
             $invalid_properties[] = "invalid value for 'type', must be one of 'CROPPED_RECTO', 'CROPPED_VERSO', 'CROPPED_FACE', 'CROPPED_SIGNATURE', 'CROPPED_EMITTER_SIGNATURE'.";
         }
 
@@ -201,7 +201,7 @@ class ExtractedImage implements ArrayAccess
             return false;
         }
         $allowed_values = ["CROPPED_RECTO", "CROPPED_VERSO", "CROPPED_FACE", "CROPPED_SIGNATURE", "CROPPED_EMITTER_SIGNATURE"];
-        if (!in_array($this->container['type'], $allowed_values)) {
+        if (!\in_array($this->container['type'], $allowed_values)) {
             return false;
         }
         return true;
@@ -224,8 +224,8 @@ class ExtractedImage implements ArrayAccess
      */
     public function setType($type)
     {
-        $allowed_values = array('CROPPED_RECTO', 'CROPPED_VERSO', 'CROPPED_FACE', 'CROPPED_SIGNATURE', 'CROPPED_EMITTER_SIGNATURE');
-        if ((!in_array($type, $allowed_values))) {
+        $allowed_values = ['CROPPED_RECTO', 'CROPPED_VERSO', 'CROPPED_FACE', 'CROPPED_SIGNATURE', 'CROPPED_EMITTER_SIGNATURE'];
+        if ((!\in_array($type, $allowed_values))) {
             throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CROPPED_RECTO', 'CROPPED_VERSO', 'CROPPED_FACE', 'CROPPED_SIGNATURE', 'CROPPED_EMITTER_SIGNATURE'");
         }
         $this->container['type'] = $type;
@@ -367,7 +367,7 @@ class ExtractedImage implements ArrayAccess
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($offset)) {
+        if (\is_null($offset)) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -390,11 +390,11 @@ class ExtractedImage implements ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        if (\defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return \json_encode(ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         }
 
-        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+        return \json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

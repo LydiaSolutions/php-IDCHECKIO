@@ -3,7 +3,7 @@
 "apiPackage":"api",
 "invokerPackage":"idcheckio",
 "modelPackage":"model",
-"artifactVersion":"1.0.0",
+"artifactVersion":"1.0.1",
 "gitRepoId":"php-IDCHECKIO",
 "gitUserId":"ariadnext"
 }

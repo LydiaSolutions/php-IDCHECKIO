@@ -59,7 +59,7 @@ class AnalysisApi
      *
      * @param ApiClient|null $apiClient The api client to use
      */
-    public function __construct(ApiClient $apiClient = null)
+    public function __construct(?ApiClient $apiClient = null)
     {
         if ($apiClient === null) {
             $apiClient = new ApiClient();
@@ -114,8 +114,8 @@ class AnalysisApi
      *
      * @param string $analysis_ref_uid Report analysisRefUid (required)
      * @param string $accept_language Accept language header (optional)
-     * @return array of \idcheckio\model\ReportResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\ReportResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getReportWithHttpInfo($analysis_ref_uid, $accept_language = null)
     {
@@ -130,7 +130,7 @@ class AnalysisApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
@@ -141,25 +141,25 @@ class AnalysisApi
         }
         // path params
         if ($analysis_ref_uid !== null) {
-            $resourcePath = str_replace(
+            $resourcePath = \str_replace(
                 "{" . "analysisRefUid" . "}",
                 $this->apiClient->getSerializer()->toPathValue($analysis_ref_uid),
                 $resourcePath
             );
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // this endpoint requires HTTP basic authentication
-        if (strlen($this->apiClient->getConfig()->getUsername()) !== 0 or strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
-            $headerParams['Authorization'] = 'Basic ' . base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
+        if (\strlen($this->apiClient->getConfig()->getUsername()) !== 0 or \strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
+            $headerParams['Authorization'] = 'Basic ' . \base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
         }
         // make the API Call
         try {
@@ -205,8 +205,8 @@ class AnalysisApi
      * @param bool $recto_image_cropped True to obtain recto image cropped if applicable (optional, default to false)
      * @param bool $face_image_cropped True to obtain face image cropped if applicable (optional, default to false)
      * @param bool $signature_image_cropped True to obtain signature image cropped if applicable (optional, default to false)
-     * @return ResultResponse
      *@throws ApiException on non-2xx response
+     * @return ResultResponse
      */
     public function getResult($analysis_ref_uid, $accept_language = null, $recto_image_cropped = null, $face_image_cropped = null, $signature_image_cropped = null)
     {
@@ -224,8 +224,8 @@ class AnalysisApi
      * @param bool $recto_image_cropped True to obtain recto image cropped if applicable (optional, default to false)
      * @param bool $face_image_cropped True to obtain face image cropped if applicable (optional, default to false)
      * @param bool $signature_image_cropped True to obtain signature image cropped if applicable (optional, default to false)
-     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getResultWithHttpInfo($analysis_ref_uid, $accept_language = null, $recto_image_cropped = null, $face_image_cropped = null, $signature_image_cropped = null)
     {
@@ -240,7 +240,7 @@ class AnalysisApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
@@ -263,25 +263,25 @@ class AnalysisApi
         }
         // path params
         if ($analysis_ref_uid !== null) {
-            $resourcePath = str_replace(
+            $resourcePath = \str_replace(
                 "{" . "analysisRefUid" . "}",
                 $this->apiClient->getSerializer()->toPathValue($analysis_ref_uid),
                 $resourcePath
             );
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // this endpoint requires HTTP basic authentication
-        if (strlen($this->apiClient->getConfig()->getUsername()) !== 0 or strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
-            $headerParams['Authorization'] = 'Basic ' . base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
+        if (\strlen($this->apiClient->getConfig()->getUsername()) !== 0 or \strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
+            $headerParams['Authorization'] = 'Basic ' . \base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
         }
         // make the API Call
         try {
@@ -325,8 +325,8 @@ class AnalysisApi
      * @param string $analysis_ref_uid Task analysisRefUid (required)
      * @param string $accept_language Accept language header (optional)
      * @param int $wait specify a maximum wait time in milliseconds (optional)
-     * @return TaskResponse
      *@throws ApiException on non-2xx response
+     * @return TaskResponse
      */
     public function getTask($analysis_ref_uid, $accept_language = null, $wait = null)
     {
@@ -342,8 +342,8 @@ class AnalysisApi
      * @param string $analysis_ref_uid Task analysisRefUid (required)
      * @param string $accept_language Accept language header (optional)
      * @param int $wait specify a maximum wait time in milliseconds (optional)
-     * @return array of \idcheckio\model\TaskResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\TaskResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTaskWithHttpInfo($analysis_ref_uid, $accept_language = null, $wait = null)
     {
@@ -358,7 +358,7 @@ class AnalysisApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
@@ -373,25 +373,25 @@ class AnalysisApi
         }
         // path params
         if ($analysis_ref_uid !== null) {
-            $resourcePath = str_replace(
+            $resourcePath = \str_replace(
                 "{" . "analysisRefUid" . "}",
                 $this->apiClient->getSerializer()->toPathValue($analysis_ref_uid),
                 $resourcePath
             );
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
 
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // this endpoint requires HTTP basic authentication
-        if (strlen($this->apiClient->getConfig()->getUsername()) !== 0 or strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
-            $headerParams['Authorization'] = 'Basic ' . base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
+        if (\strlen($this->apiClient->getConfig()->getUsername()) !== 0 or \strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
+            $headerParams['Authorization'] = 'Basic ' . \base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
         }
         // make the API Call
         try {
@@ -436,8 +436,8 @@ class AnalysisApi
      * @param ImageRequest $body Image request (required)
      * @param bool $async_mode true to activate asynchrone mode (optional)
      * @param string $accept_language Accept language header (optional)
-     * @return ResultResponse
      *@throws ApiException on non-2xx response
+     * @return ResultResponse
      */
     public function postImage($body, $async_mode = null, $accept_language = null)
     {
@@ -453,8 +453,8 @@ class AnalysisApi
      * @param ImageRequest $body Image request (required)
      * @param bool $async_mode true to activate asynchrone mode (optional)
      * @param string $accept_language Accept language header (optional)
-     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function postImageWithHttpInfo($body, $async_mode = null, $accept_language = null)
     {
@@ -469,7 +469,7 @@ class AnalysisApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json']);
@@ -483,7 +483,7 @@ class AnalysisApi
             $headerParams['Accept-Language'] = $this->apiClient->getSerializer()->toHeaderValue($accept_language);
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;
@@ -494,12 +494,12 @@ class AnalysisApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // this endpoint requires HTTP basic authentication
-        if (strlen($this->apiClient->getConfig()->getUsername()) !== 0 or strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
-            $headerParams['Authorization'] = 'Basic ' . base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
+        if (\strlen($this->apiClient->getConfig()->getUsername()) !== 0 or \strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
+            $headerParams['Authorization'] = 'Basic ' . \base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
         }
         // make the API Call
         try {
@@ -547,8 +547,8 @@ class AnalysisApi
      * @param MrzRequest $body Mrz request (required)
      * @param bool $async_mode true to activate asynchrone mode (optional)
      * @param string $accept_language Accept language header (optional)
-     * @return ResultResponse
      *@throws ApiException on non-2xx response
+     * @return ResultResponse
      */
     public function postMrz($body, $async_mode = null, $accept_language = null)
     {
@@ -564,8 +564,8 @@ class AnalysisApi
      * @param MrzRequest $body Mrz request (required)
      * @param bool $async_mode true to activate asynchrone mode (optional)
      * @param string $accept_language Accept language header (optional)
-     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      *@throws ApiException on non-2xx response
+     * @return array of \idcheckio\model\ResultResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function postMrzWithHttpInfo($body, $async_mode = null, $accept_language = null)
     {
@@ -580,7 +580,7 @@ class AnalysisApi
         $headerParams = [];
         $formParams = [];
         $_header_accept = $this->apiClient->selectHeaderAccept(['application/json; charset=utf-8']);
-        if (!is_null($_header_accept)) {
+        if (!\is_null($_header_accept)) {
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json']);
@@ -594,7 +594,7 @@ class AnalysisApi
             $headerParams['Accept-Language'] = $this->apiClient->getSerializer()->toHeaderValue($accept_language);
         }
         // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+        $resourcePath = \str_replace("{format}", "json", $resourcePath);
 
         // body params
         $_tempBody = null;
@@ -605,12 +605,12 @@ class AnalysisApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
+        } elseif (\count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
         // this endpoint requires HTTP basic authentication
-        if (strlen($this->apiClient->getConfig()->getUsername()) !== 0 or strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
-            $headerParams['Authorization'] = 'Basic ' . base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
+        if (\strlen($this->apiClient->getConfig()->getUsername()) !== 0 or \strlen($this->apiClient->getConfig()->getPassword()) !== 0) {
+            $headerParams['Authorization'] = 'Basic ' . \base64_encode($this->apiClient->getConfig()->getUsername() . ":" . $this->apiClient->getConfig()->getPassword());
         }
         // make the API Call
         try {
